@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cat food calories per cup and per can: how much to feed a day</title>
+<meta name="description" content="Look up calories per cup (dry) or per can (wet) for Hill's and Blue Buffalo cat food formulas, get cups, cans and grams per day, and keep calories steady when you switch foods. Runs in your browser.">
+<link rel="canonical" href="https://maxotto-agent.github.io/catfood/">
+<style>
+:root{--fg:#1d2327;--mut:#5d6872;--line:#d9dee3;--acc:#1f6f5c;--bg:#fff;--soft:#f4f7f6}
+@media(prefers-color-scheme:dark){:root{--fg:#e6e9eb;--mut:#9aa5ad;--line:#2f383e;--acc:#5fc2a8;--bg:#14181b;--soft:#1b2124}}
+*{box-sizing:border-box}body{font:16px/1.5 system-ui,sans-serif;color:var(--fg);background:var(--bg);margin:0}
+main{max-width:46rem;margin:0 auto;padding:1.5rem 1rem 3rem}
+h1{font-size:1.6rem;line-height:1.25;margin:.2rem 0 .4rem}h2{font-size:1.1rem;margin:0 0 .6rem}
+p.lead{color:var(--mut);margin:0 0 1.2rem}
+section{border:1px solid var(--line);border-radius:10px;padding:1rem;margin:0 0 1rem;background:var(--soft)}
+label{display:block;font-weight:600;font-size:.9rem;margin:.6rem 0 .2rem}
+input,select{width:100%;font:inherit;padding:.5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
+.row{display:flex;gap:.6rem}.row>*{flex:1}
+.res{font-size:1.25rem;font-weight:700;color:var(--acc);margin:.6rem 0 .2rem}
+.sub{color:var(--mut);font-size:.9rem}table{border-collapse:collapse;width:100%;font-size:.9rem;margin-top:.5rem}
+td,th{border-bottom:1px solid var(--line);padding:.3rem .4rem;text-align:left}
+a{color:var(--acc)}details{margin-top:.5rem}.hide{display:none}
+footer{margin-top:2rem;font-size:.75rem;color:var(--mut);border-top:1px solid var(--line);padding-top:.8rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Cat food calories per cup and per can, by formula</h1>
+<p class="lead">A cup of dry cat food can hold 300 calories or 590, and cans vary as much. Pick your exact formula to see its calories, then get cups or cans and grams per day, or how much of a new food matches what you feed now. Everything runs in your browser; nothing you type is sent anywhere.</p>
+
+<section>
+<h2>1. Your food</h2>
+<label for="food">Search by brand or formula (try Hill's adult, Blue Buffalo kitten or indoor)</label>
+<input id="food" list="foodlist" autocomplete="off" placeholder="Start typing…">
+<datalist id="foodlist"></datalist>
+<details><summary class="sub">Not listed? Type the numbers from your food</summary>
+<div class="row"><div><label for="mkcup">kcal per cup (dry) or per can (wet)</label><input id="mkcup" type="number" min="20" max="700" inputmode="numeric"></div>
+<div><label for="mkind">Type</label><select id="mkind"><option value="dry">Dry (cup)</option><option value="wet">Wet (can)</option></select></div></div>
+<p class="sub">Look for "calorie content" or "ME" on the package or the maker's page.</p></details>
+<div id="foodinfo" class="sub"></div>
+</section>
+
+<section>
+<h2>2. How much per day</h2>
+<div class="row"><div><label for="wt">Cat's weight</label><input id="wt" type="number" min="0.5" step="any" inputmode="decimal"></div>
+<div><label for="unit">Unit</label><select id="unit"><option value="lb">pounds</option><option value="kg">kilograms</option></select></div></div>
+<label for="stage">Life stage</label><select id="stage"></select>
+<label for="target">…or type your vet's calorie target (kcal per day)</label><input id="target" type="number" min="20" inputmode="numeric">
+<div id="out1"></div>
+</section>
+
+<section>
+<h2>3. Switching foods? Keep calories the same</h2>
+<p class="sub">Search your <b>old</b> food, or type its kcal per cup or can, and how much you feed now. Switch gradually over a week or more.</p>
+<label for="old">Old food</label><input id="old" list="foodlist" autocomplete="off" placeholder="Start typing, or leave blank and type kcal below">
+<div class="row"><div><label for="okcup">Old kcal per cup or can</label><input id="okcup" type="number" min="20" max="700" inputmode="numeric"></div>
+<div><label for="ocups">Cups or cans per day now</label><input id="ocups" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div id="out2"></div>
+</section>
+
+<section>
+<h2>Browse by brand</h2>
+<p class="sub"><a href="brands/blue-buffalo.html">Blue Buffalo</a> · <a href="brands/hill-s.html">Hill's</a></p>
+</section>
+
+<section>
+<h2>Where the numbers come from</h2>
+<p class="sub">Calories are copied from each maker's own product page (metabolizable energy as fed), with a link and the date checked. Grams per can are worked out from kcal per can and kcal per kg. Makers revise formulas; check the package in your hands. This page lists <span id="count"></span> from <span id="brands"></span>. Other brands are not included yet; type your food's numbers in step 1.</p>
+<p class="sub">Daily energy: resting energy RER = 70 × (kg)<sup>0.75</sup>, times a factor from the <a href="https://www.merckvetmanual.com/multimedia/table/daily-maintenance-energy-requirements-for-dogs-and-cats">Merck Veterinary Manual</a> table: neutered adult 1.2, intact adult 1.4, obesity-prone 1.0, kitten 2.5. These are starting points for healthy cats. Cats with a health condition, and cats that need to lose weight, should follow their vet's number. Adjust by ±10% to keep body condition steady.</p>
+<p class="sub">Also see the <a href="../dogfood/">dog food calorie calculator</a>.</p>
+</section>
+
+<footer>This application was autonomously scaffolded and deployed using generative software agents. Designed for lightweight, single-purpose utility. Curated and maintained by @maxim-k.</footer>
+</main>
+<script src="calc.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+let byLabel={};
+const label=f=>f.brand+' — '+f.name+(f.kind==='wet'?' (wet)':' (dry)');
+const ku=f=>f.kind==='wet'?f.kcal_can:f.kcal_cup;
+const fmtN=n=>{const t=fmtCups(n);return t};
+const amt=(f,n)=>f.kind==='wet'?(Math.round(n*4)/4)+(Math.round(n*4)/4===1?' can':' cans'):fmtN(n)+(fmtN(n)==='1'?' cup':' cups');
+function pick(i){return byLabel[i.value.trim()]||null}
+function num(id){const v=parseFloat($(id).value);return isFinite(v)&&v>0?v:null}
+function current(){const f=pick($('food'));if(f)return f;const c=num('mkcup');if(!c)return null;
+  return $('mkind').value==='wet'?{name:'your food',kind:'wet',kcal_can:c}:{name:'your food',kind:'dry',kcal_cup:c}}
+function render(){
+  const f=current(),sel=pick($('food'));
+  $('foodinfo').innerHTML=(!sel&&$('food').value.trim())?'No formula by that name: pick one from the list as you type, or enter the numbers under "Not listed?".':sel?`<b>${ku(sel)} kcal per ${sel.kind==='wet'?'can':'cup'}</b>, ${sel.kcal_kg} kcal per kg · <a href="${sel.url}">maker's page</a>, checked ${sel.checked}`:'';
+  let kcal=num('target'),how='';
+  if(!kcal){const w=num('wt');if(w&&w<=($('unit').value==='lb'?40:18)){const kg=$('unit').value==='lb'?w/2.20462:w;kcal=mer(kg,$('stage').value);
+    how=`RER ${Math.round(rer(kg))} kcal × ${FACTORS[$('stage').value][1]} (${FACTORS[$('stage').value][0].toLowerCase()})`}}
+  else how="your vet's target";
+  const o1=$('out1'),w0=num('wt');
+  if(!kcal&&w0)o1.innerHTML='<p class="sub">That weight looks too high for a cat. Check the unit.</p>';
+  else if(!kcal)o1.innerHTML='<p class="sub">Enter your cat\'s weight, or a calorie target.</p>';
+  else if(!f)o1.innerHTML=`<div class="res">About ${Math.round(kcal)} kcal per day</div><div class="sub">${how}. Pick a food in step 1 to turn this into cups or cans.</div>`;
+  else{const n=kcal/ku(f),g=f.kcal_kg?` (about ${Math.round(kcal/f.kcal_kg*1000/5)*5} g)`:'';
+    o1.innerHTML=`<div class="res">About ${amt(f,n)} a day${g}</div><div class="sub">${Math.round(kcal)} kcal ÷ ${ku(f)} kcal per ${f.kind==='wet'?'can':'cup'}. ${how}. Adjust ±10% by body condition. Split across meals.</div>`}
+  const so=pick($('old'));if(so&&document.activeElement!==$('okcup'))$('okcup').value=ku(so);
+  const ok=num('okcup'),oc=num('ocups'),o2=$('out2');
+  if(!ok||!oc||!f)o2.innerHTML='';
+  else{const kc=oc*ok,n=kc/ku(f),pct=Math.round((ku(f)/ok-1)*100);
+    const same=!so||so.kind===f.kind;
+    o2.innerHTML=`<div class="res">Feed ${amt(f,n)} of the new food</div><div class="sub">Your ${oc} × ${ok} kcal = ${Math.round(kc)} kcal a day. ${same?`The new food is ${pct===0?'the same':Math.abs(pct)+'% '+(pct>0?'richer':'leaner')} per ${f.kind==='wet'?'can':'cup'}.`:'You are changing between dry and wet, so the amounts are not comparable by volume; the calories are.'}</div>`}
+}
+fetch('foods.json').then(r=>r.json()).then(d=>{const dl=$('foodlist');
+  d.forEach(f=>{const l=label(f);byLabel[l]=f;const o=document.createElement('option');o.value=l;dl.appendChild(o)});
+  $('count').textContent=d.length+' formulas';$('brands').textContent=[...new Set(d.map(f=>f.brand))].join(' and ');render()});
+$('stage').innerHTML=Object.entries(FACTORS).map(([k,v])=>`<option value="${k}">${v[0]} (× ${v[1]})</option>`).join('');
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',render));
+</script>
+</body>
+</html>

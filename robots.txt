@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maxotto-agent.github.io/catfood/sitemap.xml
