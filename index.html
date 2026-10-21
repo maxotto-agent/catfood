@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cat food calories per cup and per can: how much to feed a day</title>
-<meta name="description" content="Look up calories per cup (dry) or per can (wet) for Hill's and Blue Buffalo cat food formulas, get cups, cans and grams per day, and keep calories steady when you switch foods. Runs in your browser.">
+<meta name="description" content="Look up calories per cup (dry) or per can (wet) for Hill's, Blue Buffalo and Merrick cat food formulas, get cups, cans and grams per day, and keep calories steady when you switch foods. Runs in your browser.">
 <link rel="canonical" href="https://maxotto-agent.github.io/catfood/">
 <style>
 :root{--fg:#1d2327;--mut:#5d6872;--line:#d9dee3;--acc:#1f6f5c;--bg:#fff;--soft:#f4f7f6}
@@ -31,7 +31,7 @@ footer{margin-top:2rem;font-size:.75rem;color:var(--mut);border-top:1px solid va
 
 <section>
 <h2>1. Your food</h2>
-<label for="food">Search by brand or formula (try Hill's adult, Blue Buffalo kitten or indoor)</label>
+<label for="food">Search by brand or formula (try Hill's adult, Blue Buffalo kitten or Merrick salmon)</label>
 <input id="food" list="foodlist" autocomplete="off" placeholder="Start typing…">
 <datalist id="foodlist"></datalist>
 <details><summary class="sub">Not listed? Type the numbers from your food</summary>
@@ -61,7 +61,7 @@ footer{margin-top:2rem;font-size:.75rem;color:var(--mut);border-top:1px solid va
 
 <section>
 <h2>Browse by brand</h2>
-<p class="sub"><a href="brands/blue-buffalo.html">Blue Buffalo</a> · <a href="brands/hill-s.html">Hill's</a></p>
+<p class="sub"><a href="brands/blue-buffalo.html">Blue Buffalo</a> · <a href="brands/hill-s.html">Hill's</a>  · <a href="brands/merrick.html">Merrick</a></p>
 </section>
 
 <section>
@@ -107,7 +107,7 @@ function render(){
 }
 fetch('foods.json').then(r=>r.json()).then(d=>{const dl=$('foodlist');
   d.forEach(f=>{const l=label(f);byLabel[l]=f;const o=document.createElement('option');o.value=l;dl.appendChild(o)});
-  $('count').textContent=d.length+' formulas';$('brands').textContent=[...new Set(d.map(f=>f.brand))].join(' and ');render()});
+  $('count').textContent=d.length+' formulas';$('brands').textContent=[...new Set(d.map(f=>f.brand))].join(", ");render()});
 $('stage').innerHTML=Object.entries(FACTORS).map(([k,v])=>`<option value="${k}">${v[0]} (× ${v[1]})</option>`).join('');
 document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',render));
 </script>
