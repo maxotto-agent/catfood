@@ -23,7 +23,7 @@ def page(title, desc, path, body):
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{BASE}{path}">
 <style>{CSS}</style>
-</head>
+<script data-goatcounter="https://maxotto-agent.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script></head>
 <body>
 <main>
 {body}
